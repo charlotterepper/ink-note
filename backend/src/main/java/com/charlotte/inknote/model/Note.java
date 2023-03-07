@@ -9,8 +9,10 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
