@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import NavBar from "./NavBar";
 
 export default function AllNotes() {
     const [notes, setNotes] = useState();
@@ -20,6 +21,7 @@ export default function AllNotes() {
 
     return (
         <>
+            <NavBar />
             <Container>
                 <Row>
                     {notes?.map((note, index) => {

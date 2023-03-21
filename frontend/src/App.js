@@ -9,7 +9,8 @@ export default function App() {
     <Router>
         <Routes>
             <Route path="/" exact element={<AllNotes />}></Route>
-            <Route path="/note/add" exact element={<AddNote />}></Route>
+            <Route path="/notes/all" exact element={<AllNotes />}></Route>
+            <Route path="/notes/add" exact element={<AddNote />}></Route>
         </Routes>
     </Router>
   );
