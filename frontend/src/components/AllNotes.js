@@ -25,7 +25,7 @@ export default function AllNotes() {
                     {notes?.map((note, index) => {
                         return (
                             <Col key={index}>
-                                <Card style={{width: "18rem"}}>
+                                <Card style={{width: "18rem", marginTop: "42px"}}>
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>
                                         <Card.Text>{note.description}</Card.Text>
