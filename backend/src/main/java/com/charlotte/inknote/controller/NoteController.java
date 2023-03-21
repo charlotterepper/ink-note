@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/notes")
 public class NoteController {
     public final NoteService noteService;
 
@@ -16,12 +16,12 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @GetMapping
-    public List<Note> getNotes() {
+    @GetMapping("/all")
+    public List<Note> allNotes() {
         return noteService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public void addNote(@RequestBody Note note) {
         noteService.save(note);
     }
