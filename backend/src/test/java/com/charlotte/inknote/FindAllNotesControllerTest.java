@@ -4,8 +4,8 @@ import com.charlotte.inknote.dto.NoteDTO;
 import com.charlotte.inknote.dto.NoteDTOMapper;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,8 +16,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,6 +30,9 @@ public class FindAllNotesControllerTest {
     @MockBean
     private NoteService noteService;
 
+    @MockBean
+    private NoteDTOMapper noteDTOMapper;
+
     @Test
     void testAllNotes() throws Exception {
         List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
@@ -39,7 +40,7 @@ public class FindAllNotesControllerTest {
         when(noteService.findAll()).thenReturn(expected);
 
         mvc.perform(get("/notes/all")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].title", is(expected.get(0).getTitle())))
@@ -48,14 +49,16 @@ public class FindAllNotesControllerTest {
 
 //    @Test
 //    void testAddNote() throws Exception {
-//        Note note = new Note("hello", "world");
+//        NoteDTO noteDTO = new NoteDTO("hello", "world");
+//        ObjectMapper objectMapper = new ObjectMapper();
 //
-//        given(noteService.save(note)).willReturn(note);
+//        when(noteService.save(noteDTO)).thenReturn(noteDTO);
 //
 //        mvc.perform(post("/notes/add")
+//                .content(objectMapper.writeValueAsString(noteDTO))
 //                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated())
-//                .andExpect(jsonPath("$.title", is(note.getTitle())))
-//                .andExpect(jsonPath("$.description", is(note.getDescription())));
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.title", is(noteDTO.getTitle())))
+//                .andExpect(jsonPath("$.description", is(noteDTO.getDescription())));
 //    }
 }

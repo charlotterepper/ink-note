@@ -23,6 +23,8 @@ public class NoteService {
     }
 
     public NoteDTO save(NoteDTO noteDTO) {
-        return noteDTOMapper.toNoteDTO(noteRepository.save(noteDTOMapper.toNote(noteDTO)));
+        Note note = noteDTOMapper.toNote(noteDTO);
+        Note savedNote = noteRepository.save(note);
+        return noteDTOMapper.toNoteDTO(savedNote);
     }
 }

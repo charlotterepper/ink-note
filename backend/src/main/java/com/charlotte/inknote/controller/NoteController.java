@@ -27,7 +27,7 @@ public class NoteController {
     }
 
     @PostMapping("/add")
-    public void addNote(@RequestBody NoteDTO noteDTO) {
-        noteService.save(noteDTO);
+    public NoteDTO addNote(@RequestBody NoteDTO noteDTO) {
+        return noteService.save(noteDTO);
     }
 }
