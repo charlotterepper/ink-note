@@ -6,6 +6,7 @@ import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,9 @@ public class NoteController {
     }
 
     @GetMapping("/all")
-    public List<Note> allNotes() {
-        return noteService.findAll();
+    public List<NoteDTO> allNotes() {
+        List<Note> notes = noteService.findAll();
+        return noteDTOMapper.toNoteDTOList(notes);
     }
 
     @PostMapping("/add")

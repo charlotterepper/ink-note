@@ -1,6 +1,5 @@
 package com.charlotte.inknote;
 
-import com.charlotte.inknote.controller.NoteController;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -22,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class NoteControllerTest {
+public class FindAllNotesControllerTest {
     @Autowired
     private MockMvc mvc;
 
@@ -55,7 +53,5 @@ public class NoteControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", is(note.getTitle())))
                 .andExpect(jsonPath("$.description", is(note.getDescription())));
-
-
     }
 }
