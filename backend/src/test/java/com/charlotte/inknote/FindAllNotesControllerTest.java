@@ -32,9 +32,6 @@ public class FindAllNotesControllerTest {
     @MockBean
     private NoteService noteService;
 
-    @MockBean
-    private NoteDTOMapper noteDTOMapper;
-
     @Test
     void testAllNotes() throws Exception {
         List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
