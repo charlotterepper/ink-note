@@ -5,6 +5,7 @@ import com.charlotte.inknote.dto.NoteDTOMapper;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,11 +37,9 @@ public class FindAllNotesControllerTest {
 
     @Test
     void testAllNotes() throws Exception {
-        List<Note> allNotes = List.of(new Note("hello", "world"));
         List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
 
         when(noteService.findAll()).thenReturn(expected);
-        when(noteDTOMapper.toNoteDTOList(allNotes)).thenReturn(expected);
 
         mvc.perform(get("/notes/all")
                 .contentType(MediaType.APPLICATION_JSON))
