@@ -23,13 +23,11 @@ public class NoteController {
 
     @GetMapping("/all")
     public List<NoteDTO> allNotes() {
-        List<Note> notes = noteService.findAll();
-        return noteDTOMapper.toNoteDTOList(notes);
+        return noteService.findAll();
     }
 
     @PostMapping("/add")
     public void addNote(@RequestBody NoteDTO noteDTO) {
-        Note note = noteDTOMapper.toNote(noteDTO);
-        noteService.save(note);
+        noteService.save(noteDTO);
     }
 }
