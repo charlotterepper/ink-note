@@ -14,8 +14,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,6 +42,19 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].title", is(note.getTitle())))
                 .andExpect(jsonPath("$[0].description", is(note.getDescription())));
+    }
+
+    @Test
+    void testAddNote() throws Exception {
+        Note note = new Note("hello", "world");
+
+        given(noteService.save(note)).willReturn(note);
+
+        mvc.perform(post("/notes/add")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title", is(note.getTitle())))
+                .andExpect(jsonPath("$.description", is(note.getDescription())));
 
 
     }

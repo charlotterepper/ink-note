@@ -13,10 +13,11 @@ import java.util.List;
 @RequestMapping("/notes")
 public class NoteController {
     public final NoteService noteService;
-//    public final NoteDTOMapper noteDTOMapper;
+    public final NoteDTOMapper noteDTOMapper;
 
-    public NoteController(NoteService noteService) {
+    public NoteController(NoteService noteService, NoteDTOMapper noteDTOMapper) {
         this.noteService = noteService;
+        this.noteDTOMapper = noteDTOMapper;
     }
 
     @GetMapping("/all")
@@ -25,10 +26,8 @@ public class NoteController {
     }
 
     @PostMapping("/add")
-    public void addNote(@RequestBody Note note) {
-//        System.out.println("noteDTO: " + noteDTO);
-//        Note note = noteDTOMapper.toNote(noteDTO);
-//        System.out.println("note: " + note);
+    public void addNote(@RequestBody NoteDTO noteDTO) {
+        Note note = noteDTOMapper.toNote(noteDTO);
         noteService.save(note);
     }
 }

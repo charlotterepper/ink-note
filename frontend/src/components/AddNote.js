@@ -16,7 +16,7 @@ export default function AddNote() {
         try {
             let result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
-                header: {
+                headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)
