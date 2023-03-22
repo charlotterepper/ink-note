@@ -36,14 +36,6 @@ export default function AddNote() {
             <NavBar/>
             <Container>
                 <Row style={{marginTop: "50px"}} xs lg="2">
-                    {/*<form onSubmit={submitNote}>*/}
-                    {/*    <div><label htmlFor="title">Title</label></div>*/}
-                    {/*    <div><input id="title" name="title" onChange={(e) => updateData({title: e.target.value})} type="text"/></div>*/}
-                    {/*    <div><label htmlFor="description">Last Name</label></div>*/}
-                    {/*    <div><input id="description" name="description" onChange={(e) => updateData({description: e.target.value})} type="text"/></div>*/}
-                    {/*    <input type="submit"/>*/}
-                    {/*</form>*/}
-
                     <Form onSubmit={submitNote}>
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
