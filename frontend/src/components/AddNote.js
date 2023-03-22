@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function AddNote() {
@@ -28,14 +28,17 @@ export default function AddNote() {
             } else {
                 alert("An error has occurred: " + result.status);
             }
+            return result;
         } catch (error) {
             console.log(error);
         }
     }
 
     async function handleSubmit() {
-        await submitNote();
-        navigate("/notes/all");
+        const result = await submitNote();
+        if (result && result.status === 200) {
+            navigate("/notes/all");
+        }
     }
 
     return (
@@ -43,7 +46,7 @@ export default function AddNote() {
             <NavBar/>
             <Container>
                 <Row style={{marginTop: "50px"}} xs lg="2">
-                    <Form onSubmit={handleSubmit}>
+                    <Form>
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" onChange={(e) => updateData({title: e.target.value})}/>
@@ -53,7 +56,7 @@ export default function AddNote() {
                             <Form.Control as="textarea" rows={3}
                                           onChange={(e) => updateData({description: e.target.value})}/>
                         </Form.Group>
-                        <Button type="submit">Create Note</Button>
+                        <Button onClick={handleSubmit}>Create Note</Button>
                     </Form>
                 </Row>
             </Container>
