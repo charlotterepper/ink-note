@@ -2,9 +2,7 @@ package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
 import com.charlotte.inknote.dto.NoteDTOMapper;
-import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class FindAllNotesControllerTest {
+public class NoteControllerTest {
     @Autowired
     private MockMvc mvc;
 
