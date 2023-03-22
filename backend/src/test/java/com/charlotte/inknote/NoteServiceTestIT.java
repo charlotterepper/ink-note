@@ -16,7 +16,7 @@ public class NoteServiceTestIT {
 
     static {
         System.setProperty("PSQL_USERNAME", "charlotte");
-        System.setProperty("PSQL_PASSWORD", "databasexyz");
+        System.setProperty("PSQL_PASSWORD", "databaseabc");
     }
 
     @Test
