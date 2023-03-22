@@ -19,6 +19,6 @@ public class NoteRunner implements CommandLineRunner {
             Note note = new Note(title, "Hello " + title);
             noteService.save(note);
         });
-        noteService.findAll().forEach(System.out::println);
+//        noteService.findAll().forEach(System.out::println);
     }
 }

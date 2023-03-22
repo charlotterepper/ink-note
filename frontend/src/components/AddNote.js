@@ -8,13 +8,18 @@ import {useState} from "react";
 export default function AddNote() {
     const [data, setData] = useState({title: "", description: ""});
 
-    async function submitNote(e) {
-        e.preventDefault();
+    function updateData(updatedData) {
+        setData({...data, ...updatedData});
+    }
+
+    async function submitNote() {
         try {
             let result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
-                body: JSON.stringify(data),
-                header: {"Content-Type": "application/json"}
+                header: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
             })
             if (result.status === 200) {
                 alert("Your note has been created successfully!");
@@ -31,14 +36,23 @@ export default function AddNote() {
             <NavBar/>
             <Container>
                 <Row style={{marginTop: "50px"}} xs lg="2">
+                    {/*<form onSubmit={submitNote}>*/}
+                    {/*    <div><label htmlFor="title">Title</label></div>*/}
+                    {/*    <div><input id="title" name="title" onChange={(e) => updateData({title: e.target.value})} type="text"/></div>*/}
+                    {/*    <div><label htmlFor="description">Last Name</label></div>*/}
+                    {/*    <div><input id="description" name="description" onChange={(e) => updateData({description: e.target.value})} type="text"/></div>*/}
+                    {/*    <input type="submit"/>*/}
+                    {/*</form>*/}
+
                     <Form onSubmit={submitNote}>
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text"/>
+                            <Form.Control type="text" onChange={(e) => updateData({title: e.target.value})}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3}/>
+                            <Form.Control as="textarea" rows={3}
+                                          onChange={(e) => updateData({description: e.target.value})}/>
                         </Form.Group>
                         <Button type="submit">Create Note</Button>
                     </Form>
