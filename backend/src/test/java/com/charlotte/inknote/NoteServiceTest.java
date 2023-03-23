@@ -62,14 +62,14 @@ public class NoteServiceTest {
     }
 
     @Test
-    void updateNote() {
-        Note note = new Note(6L, "old title", "old description");
-        NoteDTO noteDTO = new NoteDTO(6L, "new title", "new description");
-        when(noteRepository.findById(6L)).thenReturn(Optional.of(note));
+    void testUpdateNote() {
+        Note note = new Note(1L, "old title", "old description");
+        NoteDTO noteDTO = new NoteDTO(1L, "new title", "new description");
+        when(noteRepository.save(any())).thenReturn(note);
         when(noteDTOMapper.toNote(noteDTO)).thenReturn(note);
         when(noteDTOMapper.toNoteDTO(note)).thenReturn(noteDTO);
 
-        NoteDTO actual = noteService.update(noteDTO, 6L);
+        NoteDTO actual = noteService.update(noteDTO);
 
         assertEquals(noteDTO.getTitle(), actual.getTitle());
         assertEquals(noteDTO.getDescription(), actual.getDescription());

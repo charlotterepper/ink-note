@@ -70,9 +70,9 @@ public class NoteControllerTest {
         NoteDTO noteDTO = new NoteDTO(1L, "hello", "world");
         ObjectMapper objectMapper = new ObjectMapper();
 
-        when(noteService.update(any(), eq(1L))).thenReturn(noteDTO);
+        when(noteService.update(any())).thenReturn(noteDTO);
 
-        mvc.perform(put("/notes/update/" + 1)
+        mvc.perform(put("/notes/update")
                 .content(objectMapper.writeValueAsString(noteDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

@@ -68,7 +68,7 @@ public class NoteServiceTestIT {
         NoteDTO expected = new NoteDTO(1L, "hello", "world");
         noteRepository.save(note);
 
-        NoteDTO actual = noteService.update(expected, expected.getId());
+        NoteDTO actual = noteService.update(expected);
 
         assertEquals(expected.getTitle(), actual.getTitle());
         assertEquals(expected.getDescription(), actual.getDescription());
