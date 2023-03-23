@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NavBar from "./NavBar";
 import editImg from "../img/pencil.png";
+import deleteImg from "../img/trash.png";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function AllNotes() {
@@ -19,10 +20,34 @@ export default function AllNotes() {
     }
 
     function setNoteData(noteData) {
-        localStorage.setItem("noteId", noteData.id);
         localStorage.setItem("noteTitle", noteData.title);
         localStorage.setItem("noteDescription", noteData.description);
         navigate("/notes/update/" + noteData.id);
+    }
+
+    async function deleteNote(noteId) {
+        try {
+            const result = await fetch("http://localhost:8080/notes/delete/" + noteId, {
+                method: "DELETE",
+                headers: {
+                    "Accept": 'Access-Control-Allow-Origin',
+                    "Content-Type": "application/json"
+                }
+            })
+            if (result.status !== 200) {
+                alert("An error has occurred: " + result.status);
+            }
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleDelete(noteId) {
+        const result = await deleteNote(noteId);
+        if (result && result.status === 200) {
+            navigate("/notes/all");
+        }
     }
 
     useEffect(() => {
@@ -41,9 +66,16 @@ export default function AllNotes() {
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>
                                         <Card.Text>{note.description}</Card.Text>
-                                        <Link to={"/notes/update/" + note.id}>
-                                            <Button variant="primary" onClick={() => setNoteData({id: note.id, title: note.title, description: note.description})}>
+                                        <Link to={"/notes/update/" + note.id} style={{marginRight: "10px"}}>
+                                            <Button variant="secondary" onClick={() => setNoteData({title: note.title, description: note.description})}>
                                                 <img src={editImg} alt="pencil" width="20"/>
+                                                {/*Update*/}
+                                            </Button>
+                                        </Link>
+                                        <Link to={"/notes/delete/" + note.id}>
+                                            <Button variant="danger" onClick={() => handleDelete(note.id)}>
+                                                <img src={deleteImg} alt="trash" width="20"/>
+                                                {/*Delete*/}
                                             </Button>
                                         </Link>
                                     </Card.Body>

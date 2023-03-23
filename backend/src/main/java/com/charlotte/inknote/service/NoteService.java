@@ -42,4 +42,9 @@ public class NoteService {
         Note savedNote = noteRepository.findById(id).orElseThrow();
         return noteDTOMapper.toNoteDTO(savedNote);
     }
+
+    public void delete(Long id) {
+        Note note = noteRepository.findById(id).orElseThrow();
+        noteRepository.delete(note);
+    }
 }

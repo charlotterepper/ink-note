@@ -24,9 +24,7 @@ export default function UpdateNote() {
                 },
                 body: JSON.stringify(data)
             })
-            if (result.status === 200) {
-                alert("Your note has been updated successfully!");
-            } else {
+            if (result.status !== 200) {
                 alert("An error has occurred: " + result.status);
             }
             return result;

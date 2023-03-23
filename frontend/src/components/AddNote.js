@@ -23,9 +23,7 @@ export default function AddNote() {
                 },
                 body: JSON.stringify(data)
             })
-            if (result.status === 200) {
-                alert("Your note has been created successfully!");
-            } else {
+            if (result.status !== 200) {
                 alert("An error has occurred: " + result.status);
             }
             return result;
