@@ -23,7 +23,7 @@ export default function AllNotes() {
         <>
             <NavBar />
             <Container>
-                <Row>
+                <Row md={4}>
                     {notes?.map((note, index) => {
                         return (
                             <Col key={index}>
