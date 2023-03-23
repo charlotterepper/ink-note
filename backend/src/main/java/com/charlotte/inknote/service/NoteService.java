@@ -7,6 +7,7 @@ import com.charlotte.inknote.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -26,6 +27,19 @@ public class NoteService {
     public NoteDTO save(NoteDTO noteDTO) {
         Note note = noteDTOMapper.toNote(noteDTO);
         Note savedNote = noteRepository.save(note);
+        return noteDTOMapper.toNoteDTO(savedNote);
+    }
+
+    public NoteDTO update(NoteDTO noteDTO, Long id) {
+        Note newNote = noteDTOMapper.toNote(noteDTO);
+        noteRepository
+                .findById(id)
+                .ifPresent(note -> {
+                    note.setTitle(newNote.getTitle());
+                    note.setDescription(newNote.getDescription());
+                    noteRepository.save(note);
+                });
+        Note savedNote = noteRepository.findById(id).orElseThrow();
         return noteDTOMapper.toNoteDTO(savedNote);
     }
 }

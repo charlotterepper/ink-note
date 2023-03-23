@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,5 +59,19 @@ public class NoteServiceTest {
 
         assertEquals(expected.get(0).getTitle(), actual.get(0).getTitle());
         assertEquals(expected.get(0).getDescription(), actual.get(0).getDescription());
+    }
+
+    @Test
+    void updateNote() {
+        Note note = new Note(6L, "old title", "old description");
+        NoteDTO noteDTO = new NoteDTO(6L, "new title", "new description");
+        when(noteRepository.findById(6L)).thenReturn(Optional.of(note));
+        when(noteDTOMapper.toNote(noteDTO)).thenReturn(note);
+        when(noteDTOMapper.toNoteDTO(note)).thenReturn(noteDTO);
+
+        NoteDTO actual = noteService.update(noteDTO, 6L);
+
+        assertEquals(noteDTO.getTitle(), actual.getTitle());
+        assertEquals(noteDTO.getDescription(), actual.getDescription());
     }
 }

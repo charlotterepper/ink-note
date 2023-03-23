@@ -64,8 +64,5 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$.description", is(noteDTO.getDescription())));
     }
 
-    @Test
-    void updateNote() {
 
-    }
 }

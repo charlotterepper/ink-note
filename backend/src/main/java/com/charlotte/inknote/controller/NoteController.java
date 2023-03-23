@@ -28,4 +28,11 @@ public class NoteController {
     public NoteDTO addNote(@RequestBody NoteDTO noteDTO) {
         return noteService.save(noteDTO);
     }
+
+    @PutMapping("/update/{id}")
+    public NoteDTO updateNote(@RequestBody NoteDTO noteDTO, @PathVariable Long id) {
+        return noteService.update(noteDTO, id);
+    }
+
+
 }

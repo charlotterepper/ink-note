@@ -31,7 +31,7 @@ export default function AllNotes() {
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>
                                         <Card.Text>{note.description}</Card.Text>
-                                        <Button variant="primary">Update Note</Button>
+                                        <Button href="/notes/update" variant="primary">Update Note</Button>
                                     </Card.Body>
                                 </Card>
                             </Col>

@@ -7,7 +7,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function AddNote() {
-    const [data, setData] = useState({title: "", description: ""});
+    const [data, setData] = useState({id: "", title: "", description: ""});
     const navigate = useNavigate();
 
     function updateData(updatedData) {
