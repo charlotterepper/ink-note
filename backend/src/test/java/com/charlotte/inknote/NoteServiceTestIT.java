@@ -1,6 +1,7 @@
 package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
+import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
@@ -53,4 +55,14 @@ public class NoteServiceTestIT {
         assertEquals(expected.getTitle(), actual.getTitle());
         assertEquals(expected.getDescription(), actual.getDescription());
     }
+
+//    @Test
+//    void testDeleteNote() {
+//        NoteDTO noteDto = new NoteDTO(1L, "hello", "world");
+//        noteService.save(noteDto);
+//
+//        noteService.delete(1L);
+//
+//        assertTrue()
+//    }
 }

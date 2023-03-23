@@ -19,9 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -82,7 +80,12 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$.title", is(noteDTO.getTitle())))
                 .andExpect(jsonPath("$.description", is(noteDTO.getDescription()))
         );
+    }
 
+    @Test
+    void testDeleteNote() throws Exception {
+        mvc.perform(delete("/notes/delete/" + 1) )
+                .andExpect(status().isOk());
     }
 
 
