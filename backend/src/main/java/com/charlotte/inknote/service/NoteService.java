@@ -30,16 +30,9 @@ public class NoteService {
         return noteDTOMapper.toNoteDTO(savedNote);
     }
 
-    public NoteDTO update(NoteDTO noteDTO, Long id) {
+    public NoteDTO update(NoteDTO noteDTO) {
         Note newNote = noteDTOMapper.toNote(noteDTO);
-        noteRepository
-                .findById(id)
-                .ifPresent(note -> {
-                    note.setTitle(newNote.getTitle());
-                    note.setDescription(newNote.getDescription());
-                    noteRepository.save(note);
-                });
-        Note savedNote = noteRepository.findById(id).orElseThrow();
+        Note savedNote = noteRepository.save(newNote);
         return noteDTOMapper.toNoteDTO(savedNote);
     }
 

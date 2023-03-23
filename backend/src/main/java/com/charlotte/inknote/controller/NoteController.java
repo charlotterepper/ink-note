@@ -29,9 +29,9 @@ public class NoteController {
         return noteService.save(noteDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public NoteDTO updateNote(@RequestBody NoteDTO noteDTO, @PathVariable Long id) {
-        return noteService.update(noteDTO, id);
+    @PutMapping("/update")
+    public NoteDTO updateNote(@RequestBody NoteDTO noteDTO) {
+        return noteService.update(noteDTO);
     }
 
     @DeleteMapping("/delete/{id}")
