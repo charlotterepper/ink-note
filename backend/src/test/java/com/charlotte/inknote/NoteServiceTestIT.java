@@ -22,16 +22,6 @@ public class NoteServiceTestIT {
     }
 
     @Test
-    void testAddNote() {
-        NoteDTO expected = new NoteDTO(1L, "hello", "world");
-
-        NoteDTO actual = noteService.save(expected);
-
-        assertEquals(expected.getTitle(), actual.getTitle());
-        assertEquals(expected.getDescription(), actual.getDescription());
-    }
-
-    @Test
     void testAllNotes() {
         List<NoteDTO> expected = List.of(new NoteDTO(6L, "hello", "world"));
 
@@ -42,5 +32,25 @@ public class NoteServiceTestIT {
 
         assertEquals(expected.get(0).getTitle(), actual.get(lastIndex).getTitle());
         assertEquals(expected.get(0).getDescription(), actual.get(lastIndex).getDescription());
+    }
+
+    @Test
+    void testAddNote() {
+        NoteDTO expected = new NoteDTO(1L, "hello", "world");
+
+        NoteDTO actual = noteService.save(expected);
+
+        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getDescription(), actual.getDescription());
+    }
+
+    @Test
+    void testUpdateNote() {
+        NoteDTO expected = new NoteDTO(1L, "hello", "world");
+
+        NoteDTO actual = noteService.update(expected, expected.getId());
+
+        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getDescription(), actual.getDescription());
     }
 }
