@@ -2,11 +2,9 @@ package com.charlotte.inknote.controller;
 
 import com.charlotte.inknote.dto.NoteDTO;
 import com.charlotte.inknote.dto.NoteDTOMapper;
-import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

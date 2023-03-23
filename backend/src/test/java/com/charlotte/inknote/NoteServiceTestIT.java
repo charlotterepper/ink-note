@@ -23,7 +23,7 @@ public class NoteServiceTestIT {
 
     @Test
     void testAddNote() {
-        NoteDTO expected = new NoteDTO("hello", "world");
+        NoteDTO expected = new NoteDTO(1L, "hello", "world");
 
         NoteDTO actual = noteService.save(expected);
 
@@ -33,12 +33,14 @@ public class NoteServiceTestIT {
 
     @Test
     void testAllNotes() {
-        List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO(6L, "hello", "world"));
 
-        noteService.save(new NoteDTO("hello", "world"));
+        noteService.save(new NoteDTO(6L, "hello", "world"));
         List<NoteDTO> actual = noteService.findAll();
 
-        assertEquals(expected.get(0).getTitle(), actual.get(actual.size() - 1).getTitle());
-        assertEquals(expected.get(0).getDescription(), actual.get(actual.size() - 1).getDescription());
+        int lastIndex = actual.size() - 1;
+
+        assertEquals(expected.get(0).getTitle(), actual.get(lastIndex).getTitle());
+        assertEquals(expected.get(0).getDescription(), actual.get(lastIndex).getDescription());
     }
 }

@@ -35,7 +35,7 @@ public class NoteControllerTest {
 
     @Test
     void testAllNotes() throws Exception {
-        List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world"));
 
         when(noteService.findAll()).thenReturn(expected);
 
@@ -43,13 +43,14 @@ public class NoteControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id", is(expected.get(0).getId()), Long.class))
                 .andExpect(jsonPath("$[0].title", is(expected.get(0).getTitle())))
                 .andExpect(jsonPath("$[0].description", is(expected.get(0).getDescription())));
     }
 
     @Test
     void testAddNote() throws Exception {
-        NoteDTO noteDTO = new NoteDTO("hello", "world");
+        NoteDTO noteDTO = new NoteDTO(1L, "hello", "world");
         ObjectMapper objectMapper = new ObjectMapper();
 
         when(noteService.save(any())).thenReturn(noteDTO);
@@ -58,7 +59,13 @@ public class NoteControllerTest {
                 .content(objectMapper.writeValueAsString(noteDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(noteDTO.getId()), Long.class))
                 .andExpect(jsonPath("$.title", is(noteDTO.getTitle())))
                 .andExpect(jsonPath("$.description", is(noteDTO.getDescription())));
+    }
+
+    @Test
+    void updateNote() {
+
     }
 }

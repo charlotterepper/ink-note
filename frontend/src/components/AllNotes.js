@@ -27,6 +27,7 @@ export default function AllNotes() {
                     {notes?.map((note, index) => {
                         return (
                             <Col key={index}>
+                                <p>****{note.id}</p>
                                 <Card style={{width: "18rem", marginTop: "42px"}}>
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>

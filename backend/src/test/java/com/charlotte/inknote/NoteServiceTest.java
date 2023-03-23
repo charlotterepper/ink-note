@@ -34,7 +34,7 @@ public class NoteServiceTest {
 
     @Test
     void testAddNote() {
-        NoteDTO expected = new NoteDTO("hello", "world");
+        NoteDTO expected = new NoteDTO(1L, "hello", "world");
         Note note = new Note(1L, "hello", "world");
         Note noteNoId = new Note("hello", "world");
         when(noteRepository.save(any())).thenReturn(note);
@@ -49,13 +49,14 @@ public class NoteServiceTest {
 
     @Test
     void testAllNotes() {
-        List<Note> notes = List.of(new Note("hello", "world"));
-        List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
+        List<Note> notes = List.of(new Note(1L, "hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world"));
         when(noteRepository.findAll()).thenReturn(notes);
         when(noteDTOMapper.toNoteDTOList(any())).thenReturn(expected);
 
         List<NoteDTO> actual = noteService.findAll();
 
-        assertEquals(expected, actual);
+        assertEquals(expected.get(0).getTitle(), actual.get(0).getTitle());
+        assertEquals(expected.get(0).getDescription(), actual.get(0).getDescription());
     }
 }

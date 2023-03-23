@@ -1,10 +1,12 @@
 package com.charlotte.inknote.dto;
 
 public class NoteDTO {
+    private Long id;
     private String title;
     private String description;
 
-    public NoteDTO(String title, String description) {
+    public NoteDTO(Long id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
     }
@@ -23,5 +25,13 @@ public class NoteDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
