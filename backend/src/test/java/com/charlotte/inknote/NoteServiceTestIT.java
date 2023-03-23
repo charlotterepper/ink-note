@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -27,5 +29,16 @@ public class NoteServiceTestIT {
 
         assertEquals(actual.getTitle(), expected.getTitle());
         assertEquals(actual.getDescription(), expected.getDescription());
+    }
+
+    @Test
+    void testAllNotes() {
+        List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
+
+        noteService.save(new NoteDTO("hello", "world"));
+        List<NoteDTO> actual = noteService.findAll();
+
+        assertEquals(expected.get(0).getTitle(), actual.get(actual.size() - 1).getTitle());
+        assertEquals(expected.get(0).getDescription(), actual.get(actual.size() - 1).getDescription());
     }
 }
