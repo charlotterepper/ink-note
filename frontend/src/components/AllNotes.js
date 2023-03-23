@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NavBar from "./NavBar";
 import editImg from "../img/pencil.png";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function AllNotes() {
     const [notes, setNotes] = useState();
@@ -19,6 +19,7 @@ export default function AllNotes() {
     }
 
     function setNoteData(noteData) {
+        localStorage.setItem("noteId", noteData.id);
         localStorage.setItem("noteTitle", noteData.title);
         localStorage.setItem("noteDescription", noteData.description);
         navigate("/notes/update/" + noteData.id);
@@ -40,9 +41,11 @@ export default function AllNotes() {
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>
                                         <Card.Text>{note.description}</Card.Text>
-                                        <Button variant="primary" onClick={() => setNoteData({id: note.id, title: note.title, description: note.description})}>
-                                            <img src={editImg} alt="pencil" width="20"/>
-                                        </Button>
+                                        <Link to={"/notes/update/" + note.id}>
+                                            <Button variant="primary" onClick={() => setNoteData({id: note.id, title: note.title, description: note.description})}>
+                                                <img src={editImg} alt="pencil" width="20"/>
+                                            </Button>
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </Col>

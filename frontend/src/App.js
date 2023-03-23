@@ -12,7 +12,7 @@ export default function App() {
                 <Route path="/" exact element={<AllNotes/>}/>
                 <Route path="/notes/all" exact element={<AllNotes/>}/>
                 <Route path="/notes/add" exact element={<AddNote/>}/>
-                <Route path="/notes/update/:id" exact element={<UpdateNote/>}/>
+                <Route path="/notes/update/:noteId" exact element={<UpdateNote/>}/>
             </Routes>
         </Router>
     );

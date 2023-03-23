@@ -50,7 +50,8 @@ export default function UpdateNote() {
                     <Form>
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" defaultValue={localStorage.getItem("noteTitle")} onChange={(e) => updateData({title: e.target.value})}/>
+                            <Form.Control type="text" defaultValue={localStorage.getItem("noteTitle")}
+                                          onChange={(e) => updateData({title: e.target.value})}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Description</Form.Label>
