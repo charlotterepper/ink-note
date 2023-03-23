@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -41,7 +43,19 @@ public class NoteServiceTest {
 
         NoteDTO actual = noteService.save(expected);
 
-        assertEquals(actual.getTitle(), expected.getTitle());
-        assertEquals(actual.getDescription(), expected.getDescription());
+        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getDescription(), actual.getDescription());
+    }
+
+    @Test
+    void testAllNotes() {
+        List<Note> notes = List.of(new Note("hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO("hello", "world"));
+        when(noteRepository.findAll()).thenReturn(notes);
+        when(noteDTOMapper.toNoteDTOList(any())).thenReturn(expected);
+
+        List<NoteDTO> actual = noteService.findAll();
+
+        assertEquals(expected, actual);
     }
 }

@@ -19,7 +19,8 @@ public class NoteService {
     }
 
     public List<NoteDTO> findAll() {
-        return noteDTOMapper.toNoteDTOList(noteRepository.findAll());
+        List<Note> notes = noteRepository.findAll();
+        return noteDTOMapper.toNoteDTOList(notes);
     }
 
     public NoteDTO save(NoteDTO noteDTO) {

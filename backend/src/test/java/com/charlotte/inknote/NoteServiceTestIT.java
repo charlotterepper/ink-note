@@ -27,8 +27,8 @@ public class NoteServiceTestIT {
 
         NoteDTO actual = noteService.save(expected);
 
-        assertEquals(actual.getTitle(), expected.getTitle());
-        assertEquals(actual.getDescription(), expected.getDescription());
+        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getDescription(), actual.getDescription());
     }
 
     @Test
