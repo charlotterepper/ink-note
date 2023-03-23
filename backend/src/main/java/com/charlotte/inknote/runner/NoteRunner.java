@@ -6,11 +6,13 @@ import com.charlotte.inknote.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.stream.Stream;
 
 @Configuration
 @RequiredArgsConstructor
+@Profile("!test")
 public class NoteRunner implements CommandLineRunner {
     private final NoteRepository noteRepository;
 
@@ -20,6 +22,5 @@ public class NoteRunner implements CommandLineRunner {
             Note note = new Note(title, "Hello " + title);
             noteRepository.save(note);
         });
-//        noteService.findAll().forEach(System.out::println);
     }
 }
