@@ -49,7 +49,7 @@ public class NoteServiceTest {
     }
 
     @Test
-    void testAllNotes() {
+    void testFindAllNotes() {
         List<Note> notes = List.of(new Note(1L, "hello", "world"));
         List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world"));
         when(noteRepository.findAll()).thenReturn(notes);
