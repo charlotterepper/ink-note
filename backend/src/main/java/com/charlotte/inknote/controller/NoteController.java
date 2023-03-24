@@ -5,10 +5,11 @@ import com.charlotte.inknote.dto.NoteDTOMapper;
 import com.charlotte.inknote.service.NoteService;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/notes")
 public class NoteController {
     public final NoteService noteService;
@@ -37,6 +38,11 @@ public class NoteController {
     @DeleteMapping("/delete/{id}")
     public void deleteNote(@PathVariable Long id) {
         noteService.delete(id);
+    }
+
+    @GetMapping("/home")
+    public String home(Principal principal) {
+        return "Hello, " + principal.getName();
     }
 
 
