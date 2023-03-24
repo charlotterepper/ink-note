@@ -10,6 +10,8 @@ export default function NavBar () {
                   <Navbar.Brand href="/">InkNote</Navbar.Brand>
                   <Nav className="me-auto">
                       <Nav.Link href="/notes/add">Add Note</Nav.Link>
+                      <Nav.Link href="/registration">Sign up</Nav.Link>
+                      <Nav.Link href="/login">Login</Nav.Link>
                   </Nav>
               </Container>
           </Navbar>
