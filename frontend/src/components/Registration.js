@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -7,10 +6,9 @@ import Row from "react-bootstrap/Row";
 export default function Registration() {
     return (
         <>
-            <NavBar/>
             <Container className="mt-5">
                 <h1>Registration</h1>
-                <Row className="mt-5" xs lg="4">
+                <Row className="mt-5 w-25">
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicFirstName">
                             <Form.Label>First name</Form.Label>

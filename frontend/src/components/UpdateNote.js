@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -42,8 +41,8 @@ export default function UpdateNote() {
 
     return (
         <>
-            <NavBar/>
-            <Container>
+            <Container className="mt-5">
+                <h1>Update Note</h1>
                 <Row style={{marginTop: "50px"}} xs lg="2">
                     <Form>
                         <Form.Group className="mb-3" controlId="title">

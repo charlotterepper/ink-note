@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
-import NavBar from "./NavBar";
 import Login from "./Login";
+import AllNotes from "./AllNotes";
 
 export default function Welcome() {
     const [message, setMessage] = useState("");
@@ -22,11 +22,10 @@ export default function Welcome() {
 
     return (
         <>
-            <NavBar />
-            <Container className="mt-5">
-                <h1 className="text-primary">{message}</h1>
-                <h2>Please login to your account</h2>
-                <Login />
+            <Container>
+                {!localStorage.getItem("token")
+                ? <><h1 className="text-primary mt-5">{message}</h1><Login /></>
+                : <AllNotes />}
             </Container>
         </>
     );

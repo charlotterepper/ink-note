@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -41,9 +40,8 @@ export default function AddNote() {
 
     return (
         <>
-            <NavBar/>
             <Container>
-                <Row className="mt-5" xs lg="2">
+                <Row className="mt-5 w-50">
                     <h1>Add Note</h1>
                     <Form className="mt-4">
                         <Form.Group className="mb-3" controlId="title">
