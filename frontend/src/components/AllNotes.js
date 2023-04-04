@@ -67,11 +67,11 @@ export default function AllNotes() {
                     {notes?.map((note, index) => {
                         return (
                             <Col key={index}>
-                                <Card style={{width: "18rem", marginTop: "42px"}}>
+                                <Card className="mt-5 w-25">
                                     <Card.Body>
                                         <Card.Title>{note.title}</Card.Title>
                                         <Card.Text>{note.description}</Card.Text>
-                                        <Link to={"/notes/update/" + note.id} style={{marginRight: "10px"}}>
+                                        <Link to={"/notes/update/" + note.id} className="mr-1">
                                             <Button variant="secondary" onClick={() => setNoteData({title: note.title, description: note.description})}>
                                                 <img src={editImg} alt="pencil" width="20"/>
                                                 {/*Update*/}

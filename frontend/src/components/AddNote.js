@@ -43,8 +43,9 @@ export default function AddNote() {
         <>
             <NavBar/>
             <Container>
-                <Row style={{marginTop: "50px"}} xs lg="2">
-                    <Form>
+                <Row className="mt-5" xs lg="2">
+                    <h1>Add Note</h1>
+                    <Form className="mt-4">
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" onChange={(e) => updateData({title: e.target.value})}/>

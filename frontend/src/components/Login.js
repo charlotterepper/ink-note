@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -35,23 +34,23 @@ export default function Login() {
 
     function handleChange(newValue) {
         setLoginData({...loginData, ...newValue});
+        console.log(loginData)
     }
 
 
     return (
       <>
-        <NavBar/>
           <Container>
-              <Row style={{marginTop: "50px"}} xs lg="4">
+              <Row className="mt-5" lg="4">
                   <Form onSubmit={() => login}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>Email address</Form.Label>
-                          <Form.Control onChange={(e) => handleChange({email: e.target.value})} type="email" placeholder="Enter email"/>
+                          <Form.Control onChange={(e) => handleChange({email: e.target.value})} type="email" placeholder="Enter email" required/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicPassword">
                           <Form.Label>Password</Form.Label>
-                          <Form.Control onChange={(e) => handleChange({password: e.target.value})} type="password" placeholder="Password"/>
+                          <Form.Control onChange={(e) => handleChange({password: e.target.value})} type="password" placeholder="Password" required/>
                       </Form.Group>
                       <Button type="submit" variant="primary">
                           Login

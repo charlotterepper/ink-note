@@ -8,8 +8,9 @@ export default function Registration() {
     return (
         <>
             <NavBar/>
-            <Container>
-                <Row style={{marginTop: "50px"}} xs lg="4">
+            <Container className="mt-5">
+                <h1>Registration</h1>
+                <Row className="mt-5" xs lg="4">
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicFirstName">
                             <Form.Label>First name</Form.Label>
