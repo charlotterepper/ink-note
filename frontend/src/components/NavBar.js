@@ -3,6 +3,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 
 export default function NavBar () {
+    const principal = localStorage.getItem("principal");
+
     function handleLogout() {
         localStorage.removeItem("token");
         localStorage.removeItem("principal");
@@ -26,6 +28,16 @@ export default function NavBar () {
                             </>
                       }
                   </Nav>
+                  {
+                      principal
+                      ? <>
+                              <Nav className="ml-auto">
+                                  <Navbar.Text className="ml-auto">Welcome <strong>{principal.slice(1, principal.length-1)}</strong>!</Navbar.Text>
+                              </Nav>
+                        </>
+                      : ""
+                  }
+
               </Container>
           </Navbar>
       </>
