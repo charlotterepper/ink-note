@@ -3,24 +3,57 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
+    const [loginData, setLoginData] = useState({email: "", password: ""});
+    const navigate = useNavigate();
+
+    async function login(event) {
+        event.preventDefault();
+        const response = await fetch("https://localhost:8080/token", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData),
+            mode: "cors"
+        })
+        if (response.ok) {
+            const token = await response.text();
+            localStorage.setItem("token", token);
+            console.log(token);
+            localStorage.setItem("principal", JSON.stringify(loginData.email));
+            console.log(loginData);
+            navigate("/notes/all");
+
+        } else {
+            alert("Wrong username or password!");
+        }
+    }
+
+    function handleChange(newValue) {
+        setLoginData({...loginData, ...newValue});
+    }
+
+
     return (
       <>
         <NavBar/>
           <Container>
               <Row style={{marginTop: "50px"}} xs lg="4">
-                  <Form>
+                  <Form onSubmit={() => login}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>Email address</Form.Label>
-                          <Form.Control type="email" placeholder="Enter email"/>
+                          <Form.Control onChange={(e) => handleChange({email: e.target.value})} type="email" placeholder="Enter email"/>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicPassword">
                           <Form.Label>Password</Form.Label>
-                          <Form.Control type="password" placeholder="Password"/>
+                          <Form.Control onChange={(e) => handleChange({password: e.target.value})} type="password" placeholder="Password"/>
                       </Form.Group>
-                      <Button variant="primary">
+                      <Button type="submit" variant="primary">
                           Login
                       </Button>
                   </Form>

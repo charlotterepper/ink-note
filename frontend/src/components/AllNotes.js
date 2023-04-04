@@ -14,7 +14,12 @@ export default function AllNotes() {
     const navigate = useNavigate();
 
     function fetchNotes() {
-        return fetch("http://localhost:8080/notes/all")
+        return fetch("http://localhost:8080/notes/all", {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        })
             .then(response => response.json())
             .then(data => setNotes(data));
     }

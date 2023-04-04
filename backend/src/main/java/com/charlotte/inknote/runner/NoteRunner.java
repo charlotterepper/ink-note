@@ -2,7 +2,6 @@ package com.charlotte.inknote.runner;
 
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.repository.NoteRepository;
-import com.charlotte.inknote.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
