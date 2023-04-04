@@ -2,11 +2,9 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 export default function Login() {
     const [loginData, setLoginData] = useState({email: "", password: ""});
-    const navigate = useNavigate();
 
     async function submitLoginData(event) {
         event.preventDefault();
@@ -22,7 +20,7 @@ export default function Login() {
             const token = await response.text();
             localStorage.setItem("token", token);
             localStorage.setItem("principal", JSON.stringify(loginData.email));
-            navigate("/notes/all");
+            window.location.reload();
         } else {
             alert("Wrong username or password!");
         }

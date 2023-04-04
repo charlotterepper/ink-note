@@ -23,9 +23,11 @@ export default function Welcome() {
     return (
         <>
             <Container>
-                {!localStorage.getItem("token")
-                ? <><h1 className="text-primary mt-5">{message}</h1><Login /></>
-                : <AllNotes />}
+                {
+                    !localStorage.getItem("token")
+                    ? <><h1 className="text-primary mt-5">{message}</h1><Login /></>
+                    : <AllNotes />
+                }
             </Container>
         </>
     );

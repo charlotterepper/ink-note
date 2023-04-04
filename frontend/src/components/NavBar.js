@@ -9,9 +9,11 @@ export default function NavBar () {
               <Container>
                   <Navbar.Brand href="/">InkNote</Navbar.Brand>
                   <Nav className="me-auto">
-                      <Nav.Link href="/notes/all">All Notes</Nav.Link>
-                      <Nav.Link href="/notes/add">Add Note</Nav.Link>
-                      <Nav.Link href="/registration">Sign up</Nav.Link>
+                      {
+                          !localStorage.getItem("token")
+                          ? <Nav.Link href="/registration">Sign up</Nav.Link>
+                          : <><Nav.Link href="/notes/all">All Notes</Nav.Link><Nav.Link href="/notes/add">Add Note</Nav.Link></>
+                      }
                   </Nav>
               </Container>
           </Navbar>
