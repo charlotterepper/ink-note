@@ -21,9 +21,7 @@ export default function Login() {
         if (response.ok) {
             const token = await response.text();
             localStorage.setItem("token", token);
-            console.log(token);
             localStorage.setItem("principal", JSON.stringify(loginData.email));
-            console.log(loginData);
             navigate("/notes/all");
         } else {
             alert("Wrong username or password!");
@@ -32,7 +30,6 @@ export default function Login() {
 
     function handleChange(newValue) {
         setLoginData({...loginData, ...newValue});
-        console.log(loginData)
     }
 
     return (
@@ -45,7 +42,6 @@ export default function Login() {
                         <Form.Control onChange={(e) => handleChange({email: e.target.value})} type="email"
                                       placeholder="Enter email" required/>
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control onChange={(e) => handleChange({password: e.target.value})} type="password"

@@ -18,7 +18,8 @@ export default function AddNote() {
             const result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 },
                 body: JSON.stringify(data)
             })

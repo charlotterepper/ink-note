@@ -19,7 +19,8 @@ export default function UpdateNote() {
             const result = await fetch("http://localhost:8080/notes/update", {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 },
                 body: JSON.stringify(data)
             })

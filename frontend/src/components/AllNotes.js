@@ -35,7 +35,8 @@ export default function AllNotes() {
                 method: "DELETE",
                 headers: {
                     "Accept": 'Access-Control-Allow-Origin',
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 }
             })
             if (result.status !== 200) {
