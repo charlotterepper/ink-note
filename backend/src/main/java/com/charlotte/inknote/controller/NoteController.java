@@ -9,7 +9,6 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/notes")
 public class NoteController {
     public final NoteService noteService;
