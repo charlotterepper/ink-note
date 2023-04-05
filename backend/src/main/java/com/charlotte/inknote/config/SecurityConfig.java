@@ -1,5 +1,6 @@
 package com.charlotte.inknote.config;
 
+import com.charlotte.inknote.repository.UserRepository;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -34,16 +36,16 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.security.config.Customizer.*;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final RsaKeyProperties rsaKeys;
+    private final UserRepository userRepository;
 
-    public SecurityConfig(RsaKeyProperties rsaKeys) {
+    public SecurityConfig(RsaKeyProperties rsaKeys, UserRepository userRepository) {
         this.rsaKeys = rsaKeys;
+        this.userRepository = userRepository;
     }
 
     @Bean
@@ -54,14 +56,20 @@ public class SecurityConfig {
         return new ProviderManager(authProvider);
     }
 
+//    @Bean
+//    public UserDetailsService user() {
+//        return new InMemoryUserDetailsManager(
+//                User.withUsername("user@mail.com")
+//                        .password(passwordEncoder().encode("password"))
+//                        .authorities("read")
+//                        .build()
+//        );
+//    }
+
     @Bean
     public UserDetailsService user() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("user@mail.com")
-                        .password(passwordEncoder().encode("password"))
-                        .authorities("read")
-                        .build()
-        );
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean

@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Table(name = "user_account")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

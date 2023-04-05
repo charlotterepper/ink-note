@@ -16,7 +16,7 @@ public class NoteRunner implements CommandLineRunner {
     private final NoteRepository noteRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Stream.of("Note1", "Note2", "Note3", "Note4", "Note5").forEach(title -> {
             Note note = new Note(title, "Hello " + title);
             noteRepository.save(note);
