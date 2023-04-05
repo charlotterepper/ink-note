@@ -1,14 +1,18 @@
 package com.charlotte.inknote.dto;
 
+import com.charlotte.inknote.model.User;
+
 public class NoteDTO {
     private Long id;
     private String title;
     private String description;
+    private User user;
 
-    public NoteDTO(Long id, String title, String description) {
+    public NoteDTO(Long id, String title, String description, User user) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.user = user;
     }
 
     public String getTitle() {
@@ -33,5 +37,13 @@ public class NoteDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

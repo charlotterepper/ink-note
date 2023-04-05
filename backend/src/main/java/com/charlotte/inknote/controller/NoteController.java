@@ -20,7 +20,8 @@ public class NoteController {
     }
 
     @GetMapping("/all")
-    public List<NoteDTO> allNotes() {
+    public List<NoteDTO> allNotes(Principal principal) {
+        System.out.println(principal.getName());
         return noteService.findAll();
     }
 

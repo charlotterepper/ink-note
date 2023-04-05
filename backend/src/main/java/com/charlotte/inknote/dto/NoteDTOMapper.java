@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class NoteDTOMapper {
 
     public Note toNote(NoteDTO noteDTO) {
-        return new Note(noteDTO.getId(), noteDTO.getTitle(), noteDTO.getDescription());
+        return new Note(noteDTO.getId(), noteDTO.getTitle(), noteDTO.getDescription(), noteDTO.getUser());
     }
 
     public NoteDTO toNoteDTO(Note note) {
-        return new NoteDTO(note.getId(), note.getTitle(), note.getDescription());
+        return new NoteDTO(note.getId(), note.getTitle(), note.getDescription(), note.getUser());
     }
 
     public List<NoteDTO> toNoteDTOList(List<Note> notes) {
