@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -19,7 +18,8 @@ export default function AddNote() {
             const result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 },
                 body: JSON.stringify(data)
             })
@@ -41,10 +41,10 @@ export default function AddNote() {
 
     return (
         <>
-            <NavBar/>
             <Container>
-                <Row style={{marginTop: "50px"}} xs lg="2">
-                    <Form>
+                <Row className="mt-5 w-50">
+                    <h1>Add Note</h1>
+                    <Form className="mt-4">
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" onChange={(e) => updateData({title: e.target.value})}/>

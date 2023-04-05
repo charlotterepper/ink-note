@@ -2,7 +2,6 @@ package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
 import com.charlotte.inknote.dto.NoteDTOMapper;
-import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.service.NoteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
