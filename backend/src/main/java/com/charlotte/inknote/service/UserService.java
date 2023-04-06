@@ -15,14 +15,12 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final NoteDTOMapper noteDTOMapper;
 
-    public UserService(UserRepository userRepository, NoteDTOMapper noteDTOMapper) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.noteDTOMapper = noteDTOMapper;
     }
 
-    public User findByEmail(Principal principal) {
-        return userRepository.findByEmail(principal.getName()).orElseThrow();
+    public User findByEmail(String userEmail) {
+        return userRepository.findByEmail(userEmail).orElseThrow();
     }
 }

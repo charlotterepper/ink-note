@@ -2,6 +2,7 @@ package com.charlotte.inknote.controller;
 
 import com.charlotte.inknote.dto.NoteDTO;
 import com.charlotte.inknote.dto.NoteDTOMapper;
+import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.repository.UserRepository;
 import com.charlotte.inknote.service.NoteService;
@@ -27,12 +28,14 @@ public class NoteController {
 
     @GetMapping("/all")
     public List<NoteDTO> allNotes(Principal principal) {
-        Long userId = userService.findByEmail(principal).getId();
+        String userEmail = principal.getName();
+        Long userId = userService.findByEmail(userEmail).getId();
         return noteService.findByUserId(userId);
     }
 
     @PostMapping("/add")
     public NoteDTO addNote(@RequestBody NoteDTO noteDTO) {
+        System.out.println("NoteDTO: " + noteDTO.toString());
         return noteService.save(noteDTO);
     }
 

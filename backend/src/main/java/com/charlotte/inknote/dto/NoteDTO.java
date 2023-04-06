@@ -6,13 +6,13 @@ public class NoteDTO {
     private Long id;
     private String title;
     private String description;
-    private User user;
+    private UserDTO userDTO;
 
-    public NoteDTO(Long id, String title, String description, User user) {
+    public NoteDTO(Long id, String title, String description, UserDTO userDTO) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.user = user;
+        this.userDTO = userDTO;
     }
 
     public String getTitle() {
@@ -39,11 +39,21 @@ public class NoteDTO {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "NoteDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", userDTO=" + userDTO +
+                '}';
     }
 }

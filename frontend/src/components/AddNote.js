@@ -6,14 +6,26 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function AddNote() {
-    const [data, setData] = useState({id: "", title: "", description: ""});
+    const principal = localStorage.getItem("principal");
+    const principalEmail = principal.slice(1, principal.length-1);
+
+    const [data, setData] = useState({
+        id: "",
+        title: "",
+        description: "",
+        userDTO: {
+            email: ""
+        }
+    });
     const navigate = useNavigate();
 
     function updateData(updatedData) {
         setData({...data, ...updatedData});
+        data.userDTO.email = principalEmail;
     }
 
     async function submitNote() {
+        console.log(data)
         try {
             const result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
