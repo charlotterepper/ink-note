@@ -1,7 +1,5 @@
 package com.charlotte.inknote.dto;
 
-import com.charlotte.inknote.model.User;
-
 public class NoteDTO {
     private Long id;
     private String title;

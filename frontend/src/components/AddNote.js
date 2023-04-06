@@ -25,7 +25,6 @@ export default function AddNote() {
     }
 
     async function submitNote() {
-        console.log(data)
         try {
             const result = await fetch("http://localhost:8080/notes/add", {
                 method: "POST",
