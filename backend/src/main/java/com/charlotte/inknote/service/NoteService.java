@@ -40,4 +40,9 @@ public class NoteService {
         Note note = noteRepository.findById(id).orElseThrow();
         noteRepository.delete(note);
     }
+
+    public List<NoteDTO> findByUserId(Long userId) {
+        List<Note> notes = noteRepository.findByUserId(userId);
+        return noteDTOMapper.toNoteDTOList(notes);
+    }
 }

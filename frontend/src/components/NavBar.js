@@ -8,7 +8,7 @@ export default function NavBar () {
     function handleLogout() {
         localStorage.removeItem("token");
         localStorage.removeItem("principal");
-        alert("You have logged-out successfully!")
+        alert("You have logged out successfully!")
         window.location.reload();
     }
 
@@ -32,7 +32,9 @@ export default function NavBar () {
                       principal
                       ? <>
                               <Nav className="ml-auto">
-                                  <Navbar.Text className="ml-auto">Welcome <strong>{principal.slice(1, principal.length-1)}</strong>!</Navbar.Text>
+                                  <Navbar.Text className="ml-auto">
+                                      Welcome <strong>{principal.slice(1, principal.length-1)}</strong>!
+                                  </Navbar.Text>
                               </Nav>
                         </>
                       : ""
