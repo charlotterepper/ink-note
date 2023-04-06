@@ -35,12 +35,12 @@ public class NoteController {
 
     @PostMapping("/add")
     public NoteDTO addNote(@RequestBody NoteDTO noteDTO) {
-        System.out.println("NoteDTO: " + noteDTO.toString());
         return noteService.save(noteDTO);
     }
 
     @PutMapping("/update")
     public NoteDTO updateNote(@RequestBody NoteDTO noteDTO) {
+        System.out.println("NoteDTO: " + noteDTO.toString());
         return noteService.update(noteDTO);
     }
 
