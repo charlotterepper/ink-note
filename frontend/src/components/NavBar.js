@@ -32,7 +32,9 @@ export default function NavBar () {
                       principal
                       ? <>
                               <Nav className="ml-auto">
-                                  <Navbar.Text className="ml-auto">Welcome <strong>{principal.slice(1, principal.length-1)}</strong>!</Navbar.Text>
+                                  <Navbar.Text className="ml-auto">
+                                      Welcome <strong>{principal.slice(1, principal.length-1)}</strong>!
+                                  </Navbar.Text>
                               </Nav>
                         </>
                       : ""
