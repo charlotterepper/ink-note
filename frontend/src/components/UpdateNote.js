@@ -11,8 +11,8 @@ export default function UpdateNote() {
     const principalEmail = principal.slice(1, principal.length-1);
     const [data, setData] = useState({
         id: noteId,
-        title: "",
-        description: "",
+        title: localStorage.getItem("noteTitle"),
+        description: localStorage.getItem("noteDescription"),
         userDTO: {
             email: ""
         }
@@ -20,8 +20,13 @@ export default function UpdateNote() {
     const navigate = useNavigate();
 
     function updateData(updatedData) {
-        setData({...data, ...updatedData});
+        setData({
+            ...data,
+            ...updatedData
+        });
         data.userDTO.email = principalEmail;
+        console.log("updatedData title: " + updatedData.title)
+        console.log("updatedData description: " + updatedData.description)
     }
 
     async function updateNote() {
