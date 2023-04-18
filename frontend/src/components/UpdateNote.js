@@ -8,11 +8,13 @@ import {useNavigate, useParams} from "react-router-dom";
 export default function UpdateNote() {
     const {noteId} = useParams();
     const principal = localStorage.getItem("principal");
+    const oldNoteTitle = localStorage.getItem("noteTitle");
+    const oldNoteDescription = localStorage.getItem("noteDescription");
     const principalEmail = principal.slice(1, principal.length-1);
     const [data, setData] = useState({
         id: noteId,
-        title: localStorage.getItem("noteTitle"),
-        description: localStorage.getItem("noteDescription"),
+        title: oldNoteTitle,
+        description: oldNoteDescription,
         userDTO: {
             email: ""
         }
@@ -63,12 +65,12 @@ export default function UpdateNote() {
                     <Form>
                         <Form.Group className="mb-3" controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" defaultValue={localStorage.getItem("noteTitle")}
+                            <Form.Control type="text" defaultValue={oldNoteTitle}
                                           onChange={(e) => updateData({title: e.target.value})}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="description">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} defaultValue={localStorage.getItem("noteDescription")}
+                            <Form.Control as="textarea" rows={3} defaultValue={oldNoteDescription}
                                           onChange={(e) => updateData({description: e.target.value})}/>
                         </Form.Group>
                         <Button onClick={handleSubmit}>Update Note</Button>
