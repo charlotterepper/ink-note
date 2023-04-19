@@ -1,19 +1,21 @@
 package com.charlotte.inknote.dto;
 
-public class UserRegistrationDTO {
+import com.charlotte.inknote.model.Role;
+
+public class UserAdminDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+    private Role role;
 
-    public UserRegistrationDTO() {
+    public UserAdminDTO() {
     }
 
-    public UserRegistrationDTO(String firstName, String lastName, String email, String password) {
+    public UserAdminDTO(String firstName, String lastName, String email, Role role) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -40,21 +42,21 @@ public class UserRegistrationDTO {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "UserRegistrationDTO{" +
+        return "UserAdminDTO{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

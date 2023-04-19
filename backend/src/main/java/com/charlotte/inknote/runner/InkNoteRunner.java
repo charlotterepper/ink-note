@@ -59,7 +59,7 @@ public class InkNoteRunner implements CommandLineRunner {
                 "Doe",
                 "user@mail.com",
                 passwordEncoder.encode("password"),
-                Role.USER,
+                Role.ROLE_USER,
                 new HashSet<>()
         );
         User admin = new User(
@@ -68,7 +68,7 @@ public class InkNoteRunner implements CommandLineRunner {
                 "Doe",
                 "admin@mail.com",
                 passwordEncoder.encode("password"),
-                Role.ADMIN,
+                Role.ROLE_ADMIN,
                 new HashSet<>()
         );
         return List.of(user, admin);

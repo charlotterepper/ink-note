@@ -3,6 +3,9 @@ package com.charlotte.inknote.dto;
 import com.charlotte.inknote.model.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserRegistrationDTOMapper {
 
@@ -12,15 +15,6 @@ public class UserRegistrationDTOMapper {
                 userFullNameDTO.getLastName(),
                 userFullNameDTO.getEmail(),
                 userFullNameDTO.getPassword()
-        );
-    }
-
-    public UserRegistrationDTO toUserFullNameDTO(User user) {
-        return new UserRegistrationDTO(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPassword()
         );
     }
 }

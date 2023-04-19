@@ -46,11 +46,4 @@ public class NoteController {
     public void deleteNote(@PathVariable Long id) {
         noteService.delete(id);
     }
-
-    @GetMapping("/home")
-    public String home(Principal principal) {
-        return "Hello, " + principal.getName();
-    }
-
-
 }
