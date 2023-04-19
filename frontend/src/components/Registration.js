@@ -16,7 +16,7 @@ export default function Registration() {
 
     async function registerUser() {
         try {
-            const result = await fetch("http://localhost:8080/registration", {
+            const result = await fetch("http://localhost:8080/auth/registration", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -39,7 +39,7 @@ export default function Registration() {
     }
 
     async function isEmailTaken() {
-        const response = await fetch("http://localhost:8080/email-taken/" + user.email, {
+        const response = await fetch("http://localhost:8080/auth/email-taken/" + user.email, {
             method: "GET"
         });
         const emailTaken = await response.text();

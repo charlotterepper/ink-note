@@ -8,7 +8,7 @@ export default function Login() {
 
     async function submitLoginData(event) {
         event.preventDefault();
-        const response = await fetch("http://localhost:8080/token", {
+        const response = await fetch("http://localhost:8080/auth/token", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
