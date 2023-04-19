@@ -61,10 +61,12 @@ export default function AllNotes() {
 
     return (
         <>
-            <Container>
-                {notes?.length === 0 ? (
-                    <div className="mt-5">No notes found.</div>
-                ) : (
+            {notes?.length === 0 ? (
+                <Container>
+                    <div className="mt-5">You don't have any notes yet.</div>
+                </Container>
+            ) : (
+                <Container>
                     <Row md={4}>
                         {notes?.map((note, index) => {
                             return (
@@ -93,8 +95,8 @@ export default function AllNotes() {
                             );
                         })}
                     </Row>
-                )}
-            </Container>
+                </Container>
+            )}
         </>
     );
 }
