@@ -61,35 +61,42 @@ export default function AllNotes() {
 
     return (
         <>
-            <Container>
-                <Row md={4}>
-                    {notes?.map((note, index) => {
-                        return (
-                            <Col key={index}>
-                                <Card className="w-100 mt-5">
-                                    <Card.Body>
-                                        <Card.Title>{note.title}</Card.Title>
-                                        <Card.Text>{note.description}</Card.Text>
-                                        <Link to={"/notes/update/" + note.id} style={{marginRight: "10px"}}>
-                                            <Button className="mr-2" variant="secondary" onClick={() => setNoteData({
-                                                title: note.title,
-                                                description: note.description
-                                            })}>
-                                                <img src={editImg} alt="pencil" width="20"/>
-                                            </Button>
-                                        </Link>
-                                        <Link to={"/notes/delete/" + note.id}>
-                                            <Button variant="danger" onClick={() => handleDelete(note.id)}>
-                                                <img src={deleteImg} alt="trash" width="20"/>
-                                            </Button>
-                                        </Link>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </Container>
+            {notes?.length === 0 ? (
+                <Container>
+                    <div className="mt-5">You don't have any notes yet.</div>
+                </Container>
+            ) : (
+                <Container>
+                    <Row md={4}>
+                        {notes?.map((note, index) => {
+                            return (
+                                <Col key={index}>
+                                    <Card className="w-100 mt-5">
+                                        <Card.Body>
+                                            <Card.Title>{note.title}</Card.Title>
+                                            <Card.Text>{note.description}</Card.Text>
+                                            <Link to={"/notes/update/" + note.id} style={{marginRight: "10px"}}>
+                                                <Button className="mr-2" variant="secondary"
+                                                        onClick={() => setNoteData({
+                                                            title: note.title,
+                                                            description: note.description
+                                                        })}>
+                                                    <img src={editImg} alt="pencil" width="20"/>
+                                                </Button>
+                                            </Link>
+                                            <Link to={"/notes/delete/" + note.id}>
+                                                <Button variant="danger" onClick={() => handleDelete(note.id)}>
+                                                    <img src={deleteImg} alt="trash" width="20"/>
+                                                </Button>
+                                            </Link>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                </Container>
+            )}
         </>
     );
 }

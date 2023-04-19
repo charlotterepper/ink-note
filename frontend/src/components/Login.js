@@ -8,7 +8,7 @@ export default function Login() {
 
     async function submitLoginData(event) {
         event.preventDefault();
-        const response = await fetch("http://localhost:8080/token", {
+        const response = await fetch("http://localhost:8080/auth/token", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,7 +43,7 @@ export default function Login() {
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control onChange={(e) => handleChange({password: e.target.value})} type="password"
-                                      placeholder="Password" required/>
+                                      placeholder="Enter password" required/>
                     </Form.Group>
                     <Button type="submit" variant="primary">
                         Login

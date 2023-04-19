@@ -17,12 +17,10 @@ import java.util.Optional;
 @RequestMapping("/notes")
 public class NoteController {
     private final NoteService noteService;
-    private final NoteDTOMapper noteDTOMapper;
     private final UserService userService;
 
-    public NoteController(NoteService noteService, NoteDTOMapper noteDTOMapper, UserService userService) {
+    public NoteController(NoteService noteService, UserService userService) {
         this.noteService = noteService;
-        this.noteDTOMapper = noteDTOMapper;
         this.userService = userService;
     }
 
