@@ -38,10 +38,27 @@ export default function Registration() {
         });
     }
 
+    async function isEmailTaken() {
+        const response = await fetch("http://localhost:8080/email-taken/" + user.email, {
+            method: "GET"
+        });
+        const emailTaken = await response.text();
+        console.log(emailTaken)
+        console.log(emailTaken === "true");
+        return emailTaken === "true";
+
+    }
+
     async function handleSubmit() {
-        const result = await registerUser();
-        if (result && result.status === 200) {
-            navigate("/");
+        const emailTaken = await isEmailTaken();
+        console.log("emailTaken " + emailTaken)
+        if (emailTaken === true) {
+            alert("User with this email already exists");
+        } else {
+            const result = await registerUser();
+            if (result && result.status === 200) {
+                navigate("/");
+            }
         }
     }
 
@@ -53,13 +70,13 @@ export default function Registration() {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicFirstName">
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="firstName" placeholder="First name"
+                            <Form.Control type="firstName" placeholder="Enter first name"
                                           onChange={(e) => updateUser({firstName: e.target.value})}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicLastName">
                             <Form.Label>Last name</Form.Label>
-                            <Form.Control type="lastName" placeholder="Last name"
+                            <Form.Control type="lastName" placeholder="Enter last name"
                                           onChange={(e) => updateUser({lastName: e.target.value})}/>
                         </Form.Group>
 
@@ -71,7 +88,7 @@ export default function Registration() {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"
+                            <Form.Control type="password" placeholder="Enter password"
                                           onChange={(e) => updateUser({password: e.target.value})}/>
                         </Form.Group>
                         <Button variant="primary" onClick={handleSubmit}>Sign up</Button>

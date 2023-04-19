@@ -5,25 +5,35 @@ import com.charlotte.inknote.dto.UserRegistrationDTOMapper;
 import com.charlotte.inknote.model.Role;
 import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final UserRegistrationDTOMapper userFullNameDTOMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserRegistrationDTOMapper userFullNameDTOMapper) {
+    public UserService(UserRepository userRepository, UserRegistrationDTOMapper userFullNameDTOMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userFullNameDTOMapper = userFullNameDTOMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User findByEmail(String userEmail) {
         return userRepository.findByEmail(userEmail).orElseThrow();
     }
 
-    public User save(UserRegistrationDTO userFullNameDTO) {
-        User user = userFullNameDTOMapper.toUser(userFullNameDTO);
+    public User save(UserRegistrationDTO userRegistrationDTO) {
+        User user = userFullNameDTOMapper.toUser(userRegistrationDTO);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.USER);
         return userRepository.save(user);
+    }
+
+    public boolean isTaken(String email) {
+        return userRepository.existsUserByEmail(email);
     }
 }

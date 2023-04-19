@@ -5,12 +5,15 @@ import com.charlotte.inknote.dto.UserRegistrationDTO;
 import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.service.TokenService;
 import com.charlotte.inknote.service.UserService;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 public class AuthController {
@@ -36,5 +39,11 @@ public class AuthController {
         User savedUser = userService.save(userRegistrationDTO);
         System.out.println("savedUser from registration: {" + savedUser.getFirstName() + ", " + savedUser.getLastName() +
                 ", " + savedUser.getEmail() + ", " + savedUser.getPassword() + "}");
+
+    }
+
+    @GetMapping("/email-taken/{email}")
+    public boolean emailTaken(@PathVariable String email) {
+        return userService.isTaken(email);
     }
 }
