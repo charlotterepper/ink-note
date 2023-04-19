@@ -55,10 +55,9 @@ export default function Registration() {
         if (emailTaken === true) {
             alert("User with this email already exists");
         } else {
-            const result = await registerUser();
-            if (result && result.status === 200) {
-                navigate("/");
-            }
+            await registerUser();
+            alert("Your registration was successful!");
+            navigate("/");
         }
     }
 
