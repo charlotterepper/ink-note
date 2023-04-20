@@ -14,6 +14,7 @@ export default function AllNotes() {
 
     function fetchNotes() {
         return fetch("http://localhost:8080/notes/all", {
+            method: "GET",
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: "Bearer " + localStorage.getItem("token")

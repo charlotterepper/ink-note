@@ -1,17 +1,12 @@
 package com.charlotte.inknote.controller;
 
 import com.charlotte.inknote.dto.NoteDTO;
-import com.charlotte.inknote.dto.NoteDTOMapper;
-import com.charlotte.inknote.model.Note;
-import com.charlotte.inknote.model.User;
-import com.charlotte.inknote.repository.UserRepository;
 import com.charlotte.inknote.service.NoteService;
 import com.charlotte.inknote.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/notes")
