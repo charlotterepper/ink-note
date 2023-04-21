@@ -34,7 +34,7 @@ public class UserService {
     public User save(UserRegistrationDTO userRegistrationDTO) {
         User user = userFullNameDTOMapper.toUser(userRegistrationDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.ROLE_USER);
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 
