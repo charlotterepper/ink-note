@@ -41,4 +41,9 @@ public class UserService {
     public boolean isTaken(String email) {
         return userRepository.existsUserByEmail(email);
     }
+
+    public String getUserRole(String principalEmail) {
+        User user = userRepository.findByEmail(principalEmail).orElseThrow();
+        return user.getRole().toString();
+    }
 }
