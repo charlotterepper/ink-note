@@ -24,7 +24,10 @@ export default function NavBar() {
             }
         })
             .then(response => response.text())
-            .then(data => setPrincipalRole(data));
+            .then(data => {
+                setPrincipalRole(data);
+                localStorage.setItem("role", data);
+            });
     }
 
     useEffect(() => {
