@@ -1,12 +1,6 @@
 import {useEffect, useState} from "react";
-import Card from "react-bootstrap/Card"
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import editImg from "../img/pencil.png";
-import deleteImg from "../img/trash.png";
-import {Link, useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
 
 export default function AllNotes() {
@@ -34,30 +28,30 @@ export default function AllNotes() {
                     <div className="mt-5">You don't have any notes yet.</div>
                 </Container>
             ) : (
-                <Container>
+                <Container className="mt-5">
                     <Row md={4}>
-                        {users?.map((user, index) => {
-                            return (
-                                <Table striped bordered key={index}>
-                                    <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
+                        <Table striped bordered>
+                            <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {users?.map((user, index) => {
+                                return (
+                                    <tr key={index}>
                                         <td>{user.firstName}</td>
                                         <td>{user.lastName}</td>
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
                                     </tr>
-                                    </tbody>
-                                </Table>
-                            );
-                        })}
+                                );
+                            })}
+                            </tbody>
+                        </Table>
                     </Row>
                 </Container>
             )}
