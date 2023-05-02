@@ -9,17 +9,19 @@ import Registration from "./components/Registration";
 import Welcome from "./components/Welcome";
 import PrivateRoutes from "./components/PrivateRoutes";
 import NavBar from "./components/NavBar";
+import AllUsers from "./components/AllUsers";
 
 export default function App() {
     return (
         <Router>
-            <NavBar />
+            <NavBar/>
             <Routes>
-                <Route element={<PrivateRoutes />}>
+                <Route element={<PrivateRoutes/>}>
                     <Route path="/notes/all" exact element={<AllNotes/>}/>
                     <Route path="/notes/add" exact element={<AddNote/>}/>
                     <Route path="/notes/update/:noteId" exact element={<UpdateNote/>}/>
                     <Route path="/notes/delete/:noteId" exact element={<DeleteNote/>}/>
+                    <Route path="/admin/users/all" exact element={<AllUsers/>}/>
                 </Route>
                 <Route path="/" exact element={<Welcome/>}/>
                 <Route path="/registration" exact element={<Registration/>}/>
