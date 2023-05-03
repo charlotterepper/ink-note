@@ -1,7 +1,7 @@
 package com.charlotte.inknote.service;
 
 import com.charlotte.inknote.dto.UserRegistrationDTO;
-import com.charlotte.inknote.dto.UserRegistrationDTOMapper;
+import com.charlotte.inknote.mapper.UserRegistrationDTOMapper;
 import com.charlotte.inknote.model.Role;
 import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.repository.UserRepository;
@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {

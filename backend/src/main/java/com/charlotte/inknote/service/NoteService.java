@@ -1,13 +1,12 @@
 package com.charlotte.inknote.service;
 
 import com.charlotte.inknote.dto.NoteDTO;
-import com.charlotte.inknote.dto.NoteDTOMapper;
+import com.charlotte.inknote.mapper.NoteDTOMapper;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NoteService {
