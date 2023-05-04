@@ -1,14 +1,23 @@
 package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
-import com.charlotte.inknote.mapper.NoteDTOMapper;
+import com.charlotte.inknote.dto.UserAdminDTO;
+import com.charlotte.inknote.dto.UserDTO;
+import com.charlotte.inknote.mapper.UserAdminDTOMapper;
+import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.service.NoteService;
+import com.charlotte.inknote.service.TokenService;
+import com.charlotte.inknote.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -30,15 +39,27 @@ public class NoteControllerTest {
     private NoteService noteService;
 
     @MockBean
-    private NoteDTOMapper noteDTOMapper;
+    private UserService userService;
+
+    @MockBean
+    private UserAdminDTOMapper userAdminDTOMapper;
+
+    @MockBean
+    private TokenService tokenService;
+
+    @MockBean
+    private AuthenticationManager authenticationManager;
 
     @Test
+    @WithMockUser() // username "user", password "password", roles "ROLE_USER"
     void testAllNotes() throws Exception {
-        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world", new UserDTO()));
 
-        when(noteService.findAll()).thenReturn(expected);
+        when(userService.findByEmail(any())).thenReturn(new User());
+        when(noteService.findByUserId(any())).thenReturn(expected);
 
         mvc.perform(get("/notes/all")
+                        .with(SecurityMockMvcRequestPostProcessors.jwt()) // TODO: Test also works without this line. Why?
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -48,15 +69,18 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user@mail.com")
     void testAddNote() throws Exception {
-        NoteDTO noteDTO = new NoteDTO(1L, "hello", "world");
+        NoteDTO noteDTO = new NoteDTO(1L, "hello", "world", new UserDTO());
         ObjectMapper objectMapper = new ObjectMapper();
 
+        when(userService.findByEmail(any())).thenReturn(new User());
         when(noteService.save(any())).thenReturn(noteDTO);
 
         mvc.perform(post("/notes/add")
-                .content(objectMapper.writeValueAsString(noteDTO))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .with(SecurityMockMvcRequestPostProcessors.jwt())
+                        .content(objectMapper.writeValueAsString(noteDTO))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(noteDTO.getId()), Long.class))
                 .andExpect(jsonPath("$.title", is(noteDTO.getTitle())))
@@ -64,15 +88,18 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser()
     void testUpdateNote() throws Exception {
-        NoteDTO noteDTO = new NoteDTO(1L, "hello", "world");
+        NoteDTO noteDTO = new NoteDTO(1L, "hello", "world", new UserDTO());
         ObjectMapper objectMapper = new ObjectMapper();
 
+        when(userService.findByEmail(any())).thenReturn(new User());
         when(noteService.update(any())).thenReturn(noteDTO);
 
         mvc.perform(put("/notes/update")
-                .content(objectMapper.writeValueAsString(noteDTO))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .with(SecurityMockMvcRequestPostProcessors.jwt())
+                        .content(objectMapper.writeValueAsString(noteDTO))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(noteDTO.getId()), Long.class))
                 .andExpect(jsonPath("$.title", is(noteDTO.getTitle())))
@@ -81,8 +108,10 @@ public class NoteControllerTest {
     }
 
     @Test
+    @WithMockUser()
     void testDeleteNote() throws Exception {
-        mvc.perform(delete("/notes/delete/" + 1) )
+        mvc.perform(delete("/notes/delete/" + 1)
+                        .with(SecurityMockMvcRequestPostProcessors.jwt()))
                 .andExpect(status().isOk());
     }
 
