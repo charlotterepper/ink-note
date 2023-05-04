@@ -1,8 +1,12 @@
 package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
+import com.charlotte.inknote.dto.UserDTO;
 import com.charlotte.inknote.model.Note;
+import com.charlotte.inknote.model.Role;
+import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.repository.NoteRepository;
+import com.charlotte.inknote.repository.UserRepository;
 import com.charlotte.inknote.service.NoteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -24,6 +27,9 @@ public class NoteServiceTestIT {
     @Autowired
     private NoteRepository noteRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     static {
         System.setProperty("PSQL_USERNAME", "charlotte");
         System.setProperty("PSQL_PASSWORD", "databaseabc");
@@ -32,8 +38,10 @@ public class NoteServiceTestIT {
     @Test
     void testAllNotes() {
         // Arrange
-        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world"));
-        List<Note> notes = List.of(new Note(null, "hello", "world"));
+        List<NoteDTO> expected = List.of(new NoteDTO(1L, "hello", "world", new UserDTO()));
+        User user = new User();
+        userRepository.save(user);
+        List<Note> notes = List.of(new Note(null, "hello", "world", user));
         noteRepository.saveAll(notes);
 
         // Act
@@ -42,12 +50,15 @@ public class NoteServiceTestIT {
         // Assert
         assertEquals(expected.get(0).getTitle(), actual.get(0).getTitle());
         assertEquals(expected.get(0).getDescription(), actual.get(0).getDescription());
+        assertEquals(expected.get(0).getUserDTO().getEmail(), actual.get(0).getUserDTO().getEmail());
     }
 
     @Test
     void testAddNote() {
         // Arrange
-        NoteDTO expected = new NoteDTO(1L, "hello", "world");
+        User user = new User(1L, "John", "Doe", "user@mail.com", "password", Role.USER, Set.of());
+        userRepository.save(user);
+        NoteDTO expected = new NoteDTO(1L, "hello", "world", new UserDTO(user.getEmail()));
 
         // Act
         NoteDTO actual = noteService.save(expected);
@@ -60,12 +71,15 @@ public class NoteServiceTestIT {
 
         assertEquals(expected.getTitle(), addedNote.getTitle());
         assertEquals(expected.getDescription(), addedNote.getDescription());
+        assertEquals(expected.getUserDTO().getEmail(), actual.getUserDTO().getEmail());
     }
 
     @Test
     void testUpdateNote() {
-        Note note = new Note(null, "old", "old note");
-        NoteDTO expected = new NoteDTO(1L, "hello", "world");
+        User user = new User(1L, "John", "Doe", "user@mail.com", "password", Role.USER, Set.of());
+        userRepository.save(user);
+        Note note = new Note(null, "old", "old note", user);
+        NoteDTO expected = new NoteDTO(1L, "hello", "world", new UserDTO(user.getEmail()));
         noteRepository.save(note);
 
         NoteDTO actual = noteService.update(expected);
@@ -77,15 +91,20 @@ public class NoteServiceTestIT {
 
         assertEquals(expected.getTitle(), updatedNote.getTitle());
         assertEquals(expected.getDescription(), updatedNote.getDescription());
-
+        assertEquals(expected.getUserDTO().getEmail(), actual.getUserDTO().getEmail());
     }
 
     @Test
     void testDeleteNote() {
-        Note note = new Note(null, "hello", "world");
+        noteRepository.deleteAll();
+        User user = new User(1L, "John", "Doe", "user@mail.com", "password", Role.USER, Set.of());
+        userRepository.save(user);
+        Note note = new Note(null, "test title", "test description", user);
         noteRepository.save(note);
+        System.out.println("noteRepo size: " + noteRepository.findAll().size());
+        System.out.println("noteRepo findAll: " + noteRepository.findAll());
 
-        noteService.delete(1L);
+        noteService.delete(3L);
 
         assertEquals(0, noteRepository.findAll().size());
     }
