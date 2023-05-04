@@ -1,7 +1,7 @@
 package com.charlotte.inknote;
 
+import com.charlotte.inknote.controller.NoteController;
 import com.charlotte.inknote.dto.NoteDTO;
-import com.charlotte.inknote.dto.UserAdminDTO;
 import com.charlotte.inknote.dto.UserDTO;
 import com.charlotte.inknote.mapper.UserAdminDTOMapper;
 import com.charlotte.inknote.model.User;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(controllers = NoteController.class)
 public class NoteControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -41,15 +40,6 @@ public class NoteControllerTest {
     @MockBean
     private UserService userService;
 
-    @MockBean
-    private UserAdminDTOMapper userAdminDTOMapper;
-
-    @MockBean
-    private TokenService tokenService;
-
-    @MockBean
-    private AuthenticationManager authenticationManager;
-
     @Test
     @WithMockUser() // username "user", password "password", roles "ROLE_USER"
     void testAllNotes() throws Exception {
@@ -59,7 +49,7 @@ public class NoteControllerTest {
         when(noteService.findByUserId(any())).thenReturn(expected);
 
         mvc.perform(get("/notes/all")
-                        .with(SecurityMockMvcRequestPostProcessors.jwt()) // TODO: Test also works without this line. Why?
+                        .with(SecurityMockMvcRequestPostProcessors.jwt())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -69,7 +59,7 @@ public class NoteControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "user@mail.com")
+    @WithMockUser()
     void testAddNote() throws Exception {
         NoteDTO noteDTO = new NoteDTO(1L, "hello", "world", new UserDTO());
         ObjectMapper objectMapper = new ObjectMapper();

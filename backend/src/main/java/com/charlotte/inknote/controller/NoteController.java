@@ -1,6 +1,8 @@
 package com.charlotte.inknote.controller;
 
 import com.charlotte.inknote.dto.NoteDTO;
+import com.charlotte.inknote.dto.UserDTO;
+import com.charlotte.inknote.mapper.UserDTOMapper;
 import com.charlotte.inknote.service.NoteService;
 import com.charlotte.inknote.service.UserService;
 import org.springframework.web.bind.annotation.*;
