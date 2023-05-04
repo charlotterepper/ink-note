@@ -10,6 +10,7 @@ import Welcome from "./components/Welcome";
 import PrivateRoutes from "./components/PrivateRoutes";
 import NavBar from "./components/NavBar";
 import AllUsers from "./components/AllUsers";
+import AdminRoutes from "./components/AdminRoutes";
 
 export default function App() {
     return (
@@ -21,6 +22,8 @@ export default function App() {
                     <Route path="/notes/add" exact element={<AddNote/>}/>
                     <Route path="/notes/update/:noteId" exact element={<UpdateNote/>}/>
                     <Route path="/notes/delete/:noteId" exact element={<DeleteNote/>}/>
+                </Route>
+                <Route element={<AdminRoutes/>}>
                     <Route path="/admin/users/all" exact element={<AllUsers/>}/>
                 </Route>
                 <Route path="/" exact element={<Welcome/>}/>

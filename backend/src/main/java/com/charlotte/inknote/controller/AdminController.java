@@ -1,8 +1,7 @@
 package com.charlotte.inknote.controller;
 
 import com.charlotte.inknote.dto.UserAdminDTO;
-import com.charlotte.inknote.dto.UserAdminDTOMapper;
-import com.charlotte.inknote.dto.UserRegistrationDTO;
+import com.charlotte.inknote.mapper.UserAdminDTOMapper;
 import com.charlotte.inknote.model.User;
 import com.charlotte.inknote.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;

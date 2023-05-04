@@ -1,5 +1,7 @@
-package com.charlotte.inknote.dto;
+package com.charlotte.inknote.mapper;
 
+import com.charlotte.inknote.dto.NoteDTO;
+import com.charlotte.inknote.dto.UserDTO;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.model.User;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.charlotte.inknote;
 
 import com.charlotte.inknote.dto.NoteDTO;
-import com.charlotte.inknote.dto.NoteDTOMapper;
+import com.charlotte.inknote.mapper.NoteDTOMapper;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.repository.NoteRepository;
 import com.charlotte.inknote.service.NoteService;
