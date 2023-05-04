@@ -3,7 +3,6 @@ package com.charlotte.inknote.runner;
 import com.charlotte.inknote.model.Note;
 import com.charlotte.inknote.model.Role;
 import com.charlotte.inknote.model.User;
-import com.charlotte.inknote.repository.NoteRepository;
 import com.charlotte.inknote.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +18,6 @@ import java.util.List;
 @Profile("!test")
 public class InkNoteRunner implements CommandLineRunner {
     private final UserRepository userRepository;
-    private final NoteRepository noteRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -32,9 +30,11 @@ public class InkNoteRunner implements CommandLineRunner {
 
     private void connectUsersAndNotes(List<Note> notes, List<User> users) {
         for (int i = 0; i < notes.size(); i++) {
+            // Add 2 notes to user 0
             if (i < 2) {
                 notes.get(i).setUser(users.get(0));
                 users.get(0).getNotes().add(notes.get(i));
+            // Add 3 notes to user 1
             } else {
                 notes.get(i).setUser(users.get(1));
                 users.get(1).getNotes().add(notes.get(i));
