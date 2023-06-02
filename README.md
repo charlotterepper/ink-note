@@ -1,6 +1,6 @@
 # InkNote
 ## Description
-InkNote is an application for creating and storing notes. With the help of Spring Security users can signup and login to read, edit or delete their personal notes. <br/>
+InkNote is an application for creating and storing notes. With the help of Spring Security users can sign up and log in to read, edit or delete their personal notes. <br/>
 <br/>For building this application the following technologies were used:
 * Java
 * Spring Boot
