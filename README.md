@@ -27,6 +27,8 @@ InkNote is an application for creating and storing notes. With the help of Sprin
 mvn spring-boot:run
 ```
 * The application runs on localhost:3000
+* Login as "user@mail.com" with password "password"
+* Login as "admin@mail.com" with password "password"
 
 ## Credits
 Charlotte Repper https://github.com/charlotterepper
